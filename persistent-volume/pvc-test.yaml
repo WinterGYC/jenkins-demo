@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bigbang-test
+  name: mongo-pv-claim
+  labels:
+    app: bigbang
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+  selector:
+    matchLabels:
+      alicloud-pvname: mongo-pv
+  storageClassName: nas
+  volumeName: mongo-pv
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bigbang-test
+  name: mysql-pv-claim
+  labels:
+    app: bigbang
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 3Gi
+  selector:
+    matchLabels:
+      alicloud-pvname: mysql-pv
+  storageClassName: nas
+  volumeName: mysql-pv
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bigbang-test
+  name: mysql-data-pv-claim
+  labels:
+    app: bigbang
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      alicloud-pvname: mysql-data-pv
+  storageClassName: nas
+  volumeName: mysql-data-pv
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bigbang-test
+  name: redis-data-pv-claim
+  labels:
+    app: bigbang
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      alicloud-pvname: redis-data-pv
+  storageClassName: nas
+  volumeName: redis-data-pv
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: bigbang-test
+  name: redis-pv-claim
+  labels:
+    app: bigbang
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      alicloud-pvname: redis-pv
+  storageClassName: nas
+  volumeName: redis-pv

@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bigbang-svc
+  labels:
+    app: bigbang
+spec:
+  selector:
+    app: bigbang
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: bigbang
+  labels:
+    app: bigbang
+spec:
+  selector:
+    matchLabels:
+      app: bigbang
+      tier: backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: bigbang
+        tier: backend
+    spec:
+      containers:
+        - image: wintergyc2/bigbangfromwar:latest
+          name: bigbang
+          imagePullPolicy: Always
+          env:
+            - name: MYSQL_URL_BIGBANG
+              value: bigbang-mysql
+            - name: MYSQL_PASSWD_BIGBANG
+              value: "mypassword"
+            # - name: MYSQL_PASSWD_BIGBANG
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: mysql-pass
+            #       key: password
+          ports:
+            - containerPort: 8080
+              name: bigbang
+      imagePullSecrets:
+        - name: docker-hub-secret

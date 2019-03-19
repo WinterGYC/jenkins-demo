@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv
+  labels:
+    app: bigbang
+spec:
+   capacity:
+     storage: 5Gi
+   accessModes:
+     - ReadWriteMany
+   persistentVolumeReclaimPolicy: Retain
+   nfs:
+     path: /mongo
+     mode: 777
+     server: 134f7349919-tnn28.us-east-1.nas.aliyuncs.com
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+  labels:
+    app: bigbang
+spec:
+   capacity:
+     storage: 6Gi
+   accessModes:
+     - ReadWriteMany
+   persistentVolumeReclaimPolicy: Retain
+   nfs:
+     path: /mysql
+     mode: 777
+     server: 134f7349919-tnn28.us-east-1.nas.aliyuncs.com
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-data-pv
+  labels:
+    app: bigbang
+spec:
+   capacity:
+     storage: 10Gi
+   accessModes:
+     - ReadWriteMany
+   persistentVolumeReclaimPolicy: Retain
+   nfs:
+     path: /
+     server: 13393e49e22-vco12.us-east-1.nas.aliyuncs.com
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis-data-pv
+  labels:
+    app: bigbang
+spec:
+   capacity:
+     storage: 2Gi
+   accessModes:
+     - ReadWriteMany
+   persistentVolumeReclaimPolicy: Retain
+   nfs:
+     path: /
+     server: 137c1e4ac1b-bep36.us-east-1.nas.aliyuncs.com
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis-pv
+  labels:
+    app: bigbang
+spec:
+   capacity:
+     storage: 2Gi
+   accessModes:
+     - ReadWriteMany
+   persistentVolumeReclaimPolicy: Retain
+   nfs:
+     path: /redis
+     mode: 777
+     server: 134f7349919-tnn28.us-east-1.nas.aliyuncs.com

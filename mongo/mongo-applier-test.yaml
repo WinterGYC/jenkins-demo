@@ -1,0 +1,41 @@
+apiVersion: batch/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Job
+metadata:
+  namespace: bigbang-test
+  name: bigbang-mongo-applier
+  labels:
+    app: bigbang
+spec:
+  template:
+    metadata:
+      labels:
+        app: bigbang
+        tier: mongo-applier
+    spec:
+      containers:
+      - image: mongo:3.2.21
+        name: mongo-applier
+        command:
+        - /bin/sh
+        - -c
+        - >
+          mongod --auth;        
+        lifecycle:
+          postStart:
+            exec:
+              command:
+              - /bin/sh
+              - -c
+              - >
+                mongorestore --host bigbang-mongo -u root -p rsvptech --authenticationDatabase=admin -d translation /usr/local/mongodata;
+                mongo --host bigbang-mongo -u root -p rsvptech --authenticationDatabase=admin --eval 'db = db.getSiblingDB("translation"); db.createUser( { user: "translation", pwd: "rsvptech", roles: [ { role: "readWrite", db: "translation" } ] } ); db.grantRolesToUser("translation",[{ role: "readWrite", db: "translation" }]);';
+                mongod --shutdown;
+        volumeMounts:
+        - name: init-mongo-applier
+          mountPath: /usr/local/mongodata
+      volumes:
+      - name: init-mongo-applier
+        persistentVolumeClaim:
+          claimName: mongo-data-pv-claim
+      restartPolicy: Never
+
