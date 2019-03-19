@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: bigbang-test
+  name: bigbang-redis
+  labels:
+    app: bigbang
+spec:
+  ports:
+    - port: 6379
+  selector:
+    app: bigbang
+    tier: redis
+  clusterIP: None
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  namespace: bigbang-test
+  name: bigbang-redis
+  labels:
+    app: bigbang
+spec:
+  selector:
+    matchLabels:
+      app: bigbang
+      tier: redis
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: bigbang
+        tier: redis
+    spec:
+      containers:
+      - image: redis:5.0.3
+        name: redis
+        ports:
+        - containerPort: 6379
+          name: redis
