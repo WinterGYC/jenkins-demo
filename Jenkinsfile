@@ -18,7 +18,7 @@ pipeline{
         stage('Deploy to Kubernetes') {
           steps {
               container('kubectl') {
-                  step([$class: 'KubernetesDeploy', authMethod: 'certs', apiServerUrl: 'https://kubernetes.default.svc.cluster.local:443', credentialsId:'k8sCertAuth', config: 'deployment.yaml'])
+                  step([$class: 'KubernetesDeploy', authMethod: 'certs', apiServerUrl: 'https://kubernetes.default.svc.cluster.local:443', credentialsId:'k8sCertAuth', config: 'deployment.yaml', variableState: 'VarState'])
               }
           }
         }
