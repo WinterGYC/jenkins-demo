@@ -16,14 +16,13 @@ pipeline{
 
         stage('Set up DBs') {
           parallel {
-            stages{
-              stage('Set up MySQL') {
-                steps {
-                  container('kubectl') {
-                    step([$class: 'KubernetesDeploy', authMethod: 'certs', apiServerUrl: 'https://kubernetes.default.svc.cluster.local:443', credentialsId:'k8sCertAuth', config: 'AlibabaCloud/mysql/mysql-deployment-test.yaml', variableState: 'VarState'])
-                  }
+            stage('Set up MySQL') {
+              steps {
+                container('kubectl') {
+                  step([$class: 'KubernetesDeploy', authMethod: 'certs', apiServerUrl: 'https://kubernetes.default.svc.cluster.local:443', credentialsId:'k8sCertAuth', config: 'AlibabaCloud/mysql/mysql-deployment-test.yaml', variableState: 'VarState'])
                 }
               }
+            }
 
             stage('Set up MongoDB') {
               steps {
