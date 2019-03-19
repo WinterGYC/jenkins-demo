@@ -15,11 +15,12 @@ pipeline{
           }
         }
 
-        stage('Deploy to Kubernetes') {
-          steps {
+        stages{
+          stage('Set up MySQL') {
+            steps {
               container('kubectl') {
-                  step([$class: 'KubernetesDeploy', authMethod: 'certs', apiServerUrl: 'https://kubernetes.default.svc.cluster.local:443', credentialsId:'k8sCertAuth', config: 'deployment.yaml',variableState: 'ORIGIN_REPO,REPO,IMAGE_TAG'])
-              }
+                step([$class: 'KubernetesDeploy', authMethod: 'certs', apiServerUrl: 'https://kubernetes.default.svc.cluster.local:443', credentialsId:'k8sCertAuth', config: 'mysql/mysql-deployment-test.yaml'])
+            }
           }
         }
       }
