@@ -6,14 +6,6 @@ pipeline{
       }
 
       stages{
-        stage('Set up PV') {
-          steps {
-            container('kubectl') {
-              step([$class: 'KubernetesDeploy', authMethod: 'certs', apiServerUrl: 'https://kubernetes.default.svc.cluster.local:443', credentialsId:'k8sCertAuth', config: 'persistent-volume/pv-test.yaml', variableState: 'VarState'])
-            }
-          }
-        }
-
         stage('Set up PVC') {
           steps {
             container('kubectl') {

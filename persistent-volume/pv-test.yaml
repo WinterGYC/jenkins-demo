@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: mongo-test-pv
+  name: mongo-pv-test
   labels:
     app: bigbang
 spec:
@@ -18,7 +18,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: mysql-test-pv
+  name: mysql-pv-test
   labels:
     app: bigbang
 spec:
@@ -35,7 +35,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: mysql-data-test-pv
+  name: mysql-data-pv-test
   labels:
     app: bigbang
 spec:
@@ -51,7 +51,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: redis-data-test-pv
+  name: redis-data-pv-test
   labels:
     app: bigbang
 spec:
@@ -67,7 +67,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: redis-test-pv
+  name: redis-pv-test
   labels:
     app: bigbang
 spec:

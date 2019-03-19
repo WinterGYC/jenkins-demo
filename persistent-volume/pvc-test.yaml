@@ -13,9 +13,9 @@ spec:
       storage: 2Gi
   selector:
     matchLabels:
-      alicloud-pvname: mongo-pv
+      alicloud-pvname: mongo-pv-test
   storageClassName: nas
-  volumeName: mongo-pv
+  volumeName: mongo-pv-test
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -32,9 +32,9 @@ spec:
       storage: 3Gi
   selector:
     matchLabels:
-      alicloud-pvname: mysql-pv
+      alicloud-pvname: mysql-pv-test
   storageClassName: nas
-  volumeName: mysql-pv
+  volumeName: mysql-pv-test
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -51,9 +51,9 @@ spec:
       storage: 5Gi
   selector:
     matchLabels:
-      alicloud-pvname: mysql-data-pv
+      alicloud-pvname: mysql-data-pv-test
   storageClassName: nas
-  volumeName: mysql-data-pv
+  volumeName: mysql-data-pv-test
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -70,9 +70,9 @@ spec:
       storage: 1Gi
   selector:
     matchLabels:
-      alicloud-pvname: redis-data-pv
+      alicloud-pvname: redis-data-pv-test
   storageClassName: nas
-  volumeName: redis-data-pv
+  volumeName: redis-data-pv-test
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -89,6 +89,6 @@ spec:
       storage: 1Gi
   selector:
     matchLabels:
-      alicloud-pvname: redis-pv
+      alicloud-pvname: redis-pv-test
   storageClassName: nas
-  volumeName: redis-pv
+  volumeName: redis-pv-test
