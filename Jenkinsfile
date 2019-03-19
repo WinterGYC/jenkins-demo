@@ -18,7 +18,7 @@ pipeline{
         stage('Set up MySQL') {
           steps {
             container('kubectl') {
-              step([$class: 'KubernetesDeploy', authMethod: 'certs', apiServerUrl: 'https://kubernetes.default.svc.cluster.local:443', credentialsId:'k8sCertAuth', config: 'mysql/mysql-deployment-test.yaml'])
+              step([$class: 'KubernetesDeploy', authMethod: 'certs', apiServerUrl: 'https://kubernetes.default.svc.cluster.local:443', credentialsId:'k8sCertAuth', config: '/home/jenkins/workspace/demo-pipeline/mysql/mysql-deployment-test.yaml'])
             }
           }
         }
