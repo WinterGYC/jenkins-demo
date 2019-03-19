@@ -14,8 +14,6 @@ pipeline{
           }
         }
 
-        sleep 5
-
         stage('Set up MySQL') {
           steps {
             container('kubectl') {
@@ -47,8 +45,6 @@ pipeline{
               }
           }
         }
-
-        sleep 5
 
         stage('Set up bigbang') {
           steps {
