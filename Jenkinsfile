@@ -14,6 +14,8 @@ pipeline{
           }
         }
 
+        sleep 5
+
         stage('Set up MySQL') {
           steps {
             container('kubectl') {
@@ -46,12 +48,14 @@ pipeline{
           }
         }
 
-        // stage('Set up bigbang') {
-        //   steps {
-        //       container('kubectl') {
-        //           step([$class: 'KubernetesDeploy', authMethod: 'certs', apiServerUrl: 'https://kubernetes.default.svc.cluster.local:443', credentialsId:'k8sCertAuth', config: 'bigbang/bigbang-deployment-test.yaml', variableState: 'VarState'])
-        //       }
-        //   }
-        // }
+        sleep 5
+
+        stage('Set up bigbang') {
+          steps {
+              container('kubectl') {
+                  step([$class: 'KubernetesDeploy', authMethod: 'certs', apiServerUrl: 'https://kubernetes.default.svc.cluster.local:443', credentialsId:'k8sCertAuth', config: 'bigbang/bigbang-deployment-test.yaml', variableState: 'VarState'])
+              }
+          }
+        }
       }
     }
