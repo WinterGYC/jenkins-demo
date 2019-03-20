@@ -12,9 +12,9 @@ pipeline{
             dir("bigbang") {
               git branch: 'dev', credentialsId: '', url: 'https://gitlab.rsvptech.ca/dialog/bigbang.git'
             }
-            dir("agents") {
-              git branch: 'development', credentialsId: '', url: 'https://git.rsvptech.cn/dlz/Agents.git'
-            }
+            // dir("agents") {
+            //   git branch: 'development', credentialsId: '', url: 'https://git.rsvptech.cn/dlz/Agents.git'
+            // }
           }
         }
       }
