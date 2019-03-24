@@ -1,2 +1,3 @@
-FROM tomcat
-ADD target/demo.war /usr/local/tomcat/webapps/demo.war
+FROM maven:3-jdk-8
+
+ 
